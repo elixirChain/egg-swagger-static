@@ -1,0 +1,428 @@
+openapi: 3.0.0
+info:
+  title: 接口文档模板[替换成相应的项目名称]
+  description: ""
+  version: 1.0.0
+  termsOfService: http://
+  contact:
+    name: [NAME]
+    email: api@[NAME].com
+  license:
+    name: CopyRight@[NAME]
+    url: http://
+externalDocs:
+  description: Official Swagger Editor
+  url: https://editor.swagger.io/
+servers:
+  - url: http://local.swagger.org:{port}/v1/api
+    description: 访问URL(hosts 指定 ip)
+  - url: http://127.0.0.1:{port}/v1/api
+    description: 本机开发环境
+    variables:
+      port:
+        enum:
+          - '7001'
+          - '[port]'
+        default: '7001'
+tags:
+  - name: test
+    description: 测试
+  - name: user
+    description: 用户模块
+paths:
+  /test/test:
+    post:
+      tags:
+        - test
+      summary: 测试
+      description: ""
+      operationId: ""
+      responses:
+        "200":
+          description: successful!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  expiresDate:
+                    type: string
+                    format: date-time
+                    description: 过期时间
+  /test/save:
+    post:
+      tags:
+        - test
+      summary: 测试新增
+      description: ""
+      operationId: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        "200":
+          description: successful!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonDdlRes'
+  /test/update:
+    post:
+      tags:
+        - test
+      summary: 测试修改
+      description: ""
+      operationId: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: string
+                newObj:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+      responses:
+        "200":
+          description: successful!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonDdlRes'
+  /test/get:
+    post:
+      tags:
+        - test
+      summary: 测试查询单个
+      description: ""
+      operationId: ""
+      requestBody:
+        $ref: "#/components/requestBodies/IdParam"
+      responses:
+        "200":
+          description: successful!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonSingleRes'
+  /test/getPage:
+    post:
+      tags:
+        - test
+      summary: 测试查询多个（含分页）
+      description: ""
+      operationId: ""
+      requestBody:
+        $ref: "#/components/requestBodies/PageParams"
+      responses:
+        "200":
+          description: successful!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonPageRes'
+  /test/delete:
+    post:
+      tags:
+        - test
+      summary: 测试删除
+      description: ""
+      operationId: ""
+      requestBody:
+        $ref: "#/components/requestBodies/IdParam"
+      responses:
+        "200":
+          description: successful!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonDdlRes'
+  /test/saveEdge:
+    post:
+      tags:
+        - test
+      summary: 测试新增边表数据
+      description: ""
+      operationId: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _from:
+                  type: string
+                _to:
+                  type: string
+                attrs:
+                  type: object
+      responses:
+        "200":
+          description: successful!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonDdlRes'
+  /test/getVertices:
+    post:
+      tags:
+        - test
+      summary: 测试查询边表数据
+      description: ""
+      operationId: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: string
+                page_num:
+                  type: integer
+                page_size:
+                  type: integer
+                v_filter:
+                  type: object
+      responses:
+        "200":
+          description: successful!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: "标志: -1-异常;0-成功;"
+                  edges:
+                    type: object
+                    properties:
+                      vertex:
+                        description: 顶点数据对象（_to）
+                        type: object
+                      edge:
+                        $ref: '#/components/schemas/Edge'
+  /user/loginByCode:
+    post:
+      tags:
+        - user
+      summary: 授权码登录
+      description: "通过统一认证中心授权获取授权码（构造授权链接，后授权后重定向到登录首页，追加授权码到url，然后调用此接口登录）"
+      operationId: ""
+      requestBody:
+        $ref: "#/components/requestBodies/AuthCode"
+      responses:
+        "200":
+          description: successful!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginRes'
+# https://swagger.io/docs/specification/authentication
+# The securitySchemes and security keywords for authorization.
+# 2) Apply the security globally to all operations
+security:
+  - token: [] # use the same name as above
+components:
+  # 1) Define the security scheme type (HTTP bearer)
+  securitySchemes:
+    token:
+      description: token鉴权，通过header值传递(非authorization)
+      type: apiKey
+      name: token
+      in: header
+  # Define request schema
+  requestBodies:
+    IdParam:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              _id:
+                type: string
+    PageParams:
+      content:
+        application/json:
+          schema:
+            type: object
+            description: 具体查询参数见Schemas相应对象说明
+            properties:
+              page_num:
+                type: integer
+              page_size:
+                type: integer
+              filter:
+                type: object
+                properties:
+                  search_str:
+                    type: string
+                    description: 模糊匹配（支持名称和编码）
+                  type:
+                    type: string
+                    description: 数据类型
+                  _other_attrs:
+                    type: string
+                    description: 其他参数（见Schemas相应对象）
+    AuthCode:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              authCode:
+                type: string
+                description: 授权码
+  # Define response schema
+  schemas:
+    LoginRes: 
+      type: object
+      description: 登录响应
+      properties:
+        code:
+          type: string
+          description: "标志: -1-异常;0-成功;"
+        name:
+          type: string
+          description: 姓名
+        username:
+          type: string
+          description: 账户名
+        _token:
+          type: string
+        _token_expire_date:
+          type: string
+          description: 过期时间
+          format: date-time
+        super_flag:
+          type: boolean
+          description: 超级管理员标志
+        organizations:
+          type: array
+          description: 管理组织
+          items:
+            type: object
+        default_roles:
+          type: array
+          description: 拥有的默认角色（非组织关联角色）
+          items:
+            type: object
+    CommonDdlRes:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "标志: -1-异常;0-成功;"
+        _id:
+          type: string
+          description: "操作成功的_id"
+    CommonSingleRes:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "标志: -1-异常;0-成功;"
+        data:
+          type: object
+          description: "data 可自定义其他名称"
+          properties:
+            _id:
+              type: string
+              description: "主键"
+            other_attrs:
+              type: string
+              description: "其他属性(略)"
+    CommonPageRes:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "标志: -1-异常;0-成功;"
+        total_count:
+          type: number
+        has_more:
+          type: number
+        end:
+          type: number
+        pageDatas:
+          type: array
+          description: "pageDatas 可自定义其他名称"
+          items:
+            properties:
+              _id:
+                type: string
+                description: "主键"
+              other_attrs:
+                type: string
+                description: "其他属性(略)"
+    Edge:
+      type: object
+      description: edge对象（基本说明）
+      properties:
+        _from:
+          type: string
+          description: 开始顶点
+        _to:
+          type: string
+          description: 结束顶点
+        other_attrs:
+          type: string
+          description: 其他附加属性
+    StaticData:
+      description: StaticData对象
+      type: object
+      properties:
+        code_type:
+          type: string
+          description: 值类型
+        code:
+          type: string
+          description: 值
+        name:
+          type: string
+          description: 值名称
+        desc:
+          type: string
+          description: 描述
+    AreaData:
+      description: 地区信息
+      type: object
+      properties:
+        code:
+          type: string
+          description: 编码code
+        name:
+          type: string
+          description: 名称
+        parent_code:
+          type: string
+          description: 父编码code
+        level:
+          type: string
+          description: 层级
+        version:
+          type: string
+          description: 版本
+        display:
+          type: string
+          description: 显示标志：0-不展示；1-展示；
+        simple_name:
+          type: string
+          description: 简称
+        children:
+          type: array
+          description: 地区对象AreaData（拼装，新增和更新时不传入）
+          items:
+            type: object

@@ -1,6 +1,6 @@
 {
   "name": "egg-swagger-static",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A simple plugin for swagger static doc.",
   "eggPlugin": {
     "name": "swaggerStatic"
@@ -8,7 +8,11 @@
   "keywords": [
     "egg",
     "eggPlugin",
-    "egg-plugin"
+    "egg-plugin",
+    "egg-swagger",
+    "egg-swagger-static",
+    "egg-swagger-ui",
+    "swagger-static"
   ],
   "dependencies": {},
   "devDependencies": {
