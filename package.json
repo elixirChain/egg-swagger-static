@@ -1,6 +1,6 @@
 {
   "name": "egg-swagger-static",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A simple plugin for swagger static doc.",
   "eggPlugin": {
     "name": "swaggerStatic"
@@ -38,22 +38,23 @@
     "autod": "autod"
   },
   "files": [
+    "lib",
     "app.js",
-    "agent.js",
-    "config",
-    "app"
+    "index.js",
+    "index.html",
+    "swagger.yml"
   ],
   "ci": {
     "version": "8, 10"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eggjs/egg-swagger-static.git"
+    "url": "git+https://github.com/elixirChain/egg-swagger-static.git"
   },
   "bugs": {
-    "url": "https://github.com/eggjs/egg/issues"
+    "url": "https://github.com/elixirChain/egg/issues"
   },
-  "homepage": "https://github.com/eggjs/egg-swagger-static#readme",
+  "homepage": "https://github.com/elixirChain/egg-swagger-static#readme",
   "author": "17,senique",
   "license": "MIT"
 }

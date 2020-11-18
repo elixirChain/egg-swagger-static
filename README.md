@@ -44,11 +44,30 @@ exports.swaggerStatic = {
 
 ```js
 // {app_root}/config/config.default.js
-exports.swaggerStatic = {
+const swaggerPath = require('egg-swagger-static').getAbsoluteFSPath();
+
+// exports.swaggerStatic = {
+  // NOT USE.
+// };
+
+// Add config of the built-in plugin: egg-static
+config.static = {
+  maxAge: 31536000,
+  prefix: '/swg',
+  dir: swaggerPath,
 };
 ```
 
-see [config/config.default.js](config/config.default.js) for more detail.
+## Add Api docs with the specification of **OpenAPI**
+> Refer to template: [swagger.yml](swagger.yml).  
+  Add api.yml or api.json in the root dir of project.  
+
+## Visit Api Page
+> Api Page: http://[SERVRT_IP]:[SERVRT_PORT]/swg/index.html
+
+see [config/config.default.js](config/config.default.js) for more detail.  
+see [egg-static](https://github.com/eggjs/egg-static) for more detail.  
+see [OpenAPI](https://swagger.io/docs/specification/about/) for more detail. 
 
 ## Example
 
