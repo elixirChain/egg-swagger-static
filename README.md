@@ -54,7 +54,14 @@ const swaggerPath = require('egg-swagger-static').getAbsoluteFSPath();
 config.static = {
   maxAge: 31536000,
   prefix: '/swg',
-  dir: swaggerPath,
+  // dir: swaggerPath,
+  dir: [
+    // swaggerPath,
+    {
+      prefix: '/swg',
+      dir: swaggerPath
+    },
+  ],
 };
 ```
 

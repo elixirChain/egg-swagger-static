@@ -18,6 +18,8 @@ async function syncApiToPlugin(rootDir) {
       fs.copyFileSync(path.join(rootDir, '/api.yml'), destFile);
     } else if (fs.existsSync(path.join(rootDir, '/api.json'))) {
       fs.copyFileSync(path.join(rootDir, '/api.json'), destFile);
+    } else {
+      console.info('!!!Use default swagger.yml，please add your own api.yml/api.json in the root dir.');
     }
   } catch (e) {
     console.error('syncApiToPlugin error:', e);
