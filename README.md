@@ -82,7 +82,7 @@ see [OpenAPI](https://swagger.io/docs/specification/about/) for more detail.
 
 ## Questions & Suggestions
 
-Please open an issue [here](https://github.com/eggjs/egg/issues).
+Please open an issue [here](https://github.com/elixirChain/egg/issues).
 
 ## License
 

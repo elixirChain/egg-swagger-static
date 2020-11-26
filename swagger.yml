@@ -1,21 +1,21 @@
 openapi: 3.0.0
 info:
-  title: 接口文档模板[替换成相应的项目名称]
+  title: 接口文档模板[替换成项目名称]
   description: ""
   version: 1.0.0
   termsOfService: http://
   contact:
-    name: [NAME]
-    email: api@[NAME].com
+    name: author
+    email: api@author.com
   license:
-    name: CopyRight@[NAME]
+    name: CopyRight@author
     url: http://
 externalDocs:
   description: Official Swagger Editor
   url: https://editor.swagger.io/
 servers:
   - url: http://local.swagger.org:{port}/v1/api
-    description: 访问URL(hosts 指定 ip)
+    description: 访问URL(hosts 指定 ip，替换服务 port)
   - url: http://127.0.0.1:{port}/v1/api
     description: 本机开发环境
     variables:
@@ -319,7 +319,7 @@ components:
           description: 拥有的默认角色（非组织关联角色）
           items:
             type: object
-    CommonDdlRes:
+    CommonIdRes:
       type: object
       properties:
         code:
@@ -426,3 +426,10 @@ components:
           description: 地区对象AreaData（拼装，新增和更新时不传入）
           items:
             type: object
+    Common:
+      description: 示例通用对象
+      type: object
+      properties:
+        name:
+          type: string
+          description: 名称
