@@ -74,6 +74,7 @@ config.static = {
 
 see [config/config.default.js](config/config.default.js) for more detail.  
 see [egg-static](https://github.com/eggjs/egg-static) for more detail.  
+see [swagger-ui/dist](https://github.com/swagger-api/swagger-ui/tree/master/dist) for more detail.   
 see [OpenAPI](https://swagger.io/docs/specification/about/) for more detail. 
 
 ## Example
